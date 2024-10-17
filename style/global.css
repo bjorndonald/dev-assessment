@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --primary: #8576ff;
+  --secondary: #fcf7ff;
+  --success: #10b981;
+  --error: #f43f5e;
+  --accent: #F1F5F9;
+  --b-1: #ffffff;
+  --b-2: #ffffff;
+  --b-3: #E2E8F0;
+  --bc: #334155;
+  --border: #f2f2f7;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root,
+  ::backdrop {
+    --b-1: #383544;
+    --b-2: #484554;
+  }
+} */
+
+html.dark {
+    --bc: #fff;
+  --b-1: #383544;
+  --b-2: #484554;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--bc);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+main {
+    flex-grow: 1;
+    min-height: 100vh;
+}
+
+.mobile-nav{
+    display: none;
+}
+
+@media screen and (max-width: 475px) {
+    .mobile-nav {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+}
