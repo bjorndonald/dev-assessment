@@ -6,12 +6,16 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="./style/global.css">
   <link rel="stylesheet" href="./style/sidebar.css">
+  <link rel="stylesheet" href="./style/main.css">
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frontend dev assessment</title>
 </head>
 
 <body>
-  <nav id="sidebar">
+  <!-- SIDEBAR -->
+  <nav id="sidebar" class="collapsed">
     <div class="full-logo">
       <div class="logo">
         <span>Full Logo</span>
@@ -40,7 +44,7 @@
               d="M8.12465 13.1244C8.12465 12.2039 8.87085 11.4577 9.79132 11.4577H10.208C11.1285 11.4577 11.8747 12.2039 11.8747 13.1244V16.0411H8.12465V13.1244Z"
               stroke="#8576FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-  
+
           <span>Home</span>
         </a>
       </div>
@@ -56,11 +60,11 @@
               d="M15 14.1667C15 14.3877 14.9122 14.5996 14.7559 14.7559C14.5996 14.9122 14.3877 15 14.1667 15C13.9457 15 13.7337 14.9122 13.5774 14.7559C13.4211 14.5996 13.3333 14.3877 13.3333 14.1667C13.3333 13.9457 13.4211 13.7337 13.5774 13.5774C13.7337 13.4211 13.9457 13.3333 14.1667 13.3333C14.3877 13.3333 14.5996 13.4211 14.7559 13.5774C14.9122 13.7337 15 13.9457 15 14.1667ZM15 10.8333C15 11.0543 14.9122 11.2663 14.7559 11.4226C14.5996 11.5789 14.3877 11.6667 14.1667 11.6667C13.9457 11.6667 13.7337 11.5789 13.5774 11.4226C13.4211 11.2663 13.3333 11.0543 13.3333 10.8333C13.3333 10.6123 13.4211 10.4004 13.5774 10.2441C13.7337 10.0878 13.9457 10 14.1667 10C14.3877 10 14.5996 10.0878 14.7559 10.2441C14.9122 10.4004 15 10.6123 15 10.8333ZM10.8333 14.1667C10.8333 14.3877 10.7455 14.5996 10.5893 14.7559C10.433 14.9122 10.221 15 10 15C9.77899 15 9.56702 14.9122 9.41074 14.7559C9.25446 14.5996 9.16667 14.3877 9.16667 14.1667C9.16667 13.9457 9.25446 13.7337 9.41074 13.5774C9.56702 13.4211 9.77899 13.3333 10 13.3333C10.221 13.3333 10.433 13.4211 10.5893 13.5774C10.7455 13.7337 10.8333 13.9457 10.8333 14.1667ZM10.8333 10.8333C10.8333 11.0543 10.7455 11.2663 10.5893 11.4226C10.433 11.5789 10.221 11.6667 10 11.6667C9.77899 11.6667 9.56702 11.5789 9.41074 11.4226C9.25446 11.2663 9.16667 11.0543 9.16667 10.8333C9.16667 10.6123 9.25446 10.4004 9.41074 10.2441C9.56702 10.0878 9.77899 10 10 10C10.221 10 10.433 10.0878 10.5893 10.2441C10.7455 10.4004 10.8333 10.6123 10.8333 10.8333ZM6.66667 14.1667C6.66667 14.3877 6.57887 14.5996 6.42259 14.7559C6.26631 14.9122 6.05435 15 5.83333 15C5.61232 15 5.40036 14.9122 5.24408 14.7559C5.0878 14.5996 5 14.3877 5 14.1667C5 13.9457 5.0878 13.7337 5.24408 13.5774C5.40036 13.4211 5.61232 13.3333 5.83333 13.3333C6.05435 13.3333 6.26631 13.4211 6.42259 13.5774C6.57887 13.7337 6.66667 13.9457 6.66667 14.1667ZM6.66667 10.8333C6.66667 11.0543 6.57887 11.2663 6.42259 11.4226C6.26631 11.5789 6.05435 11.6667 5.83333 11.6667C5.61232 11.6667 5.40036 11.5789 5.24408 11.4226C5.0878 11.2663 5 11.0543 5 10.8333C5 10.6123 5.0878 10.4004 5.24408 10.2441C5.40036 10.0878 5.61232 10 5.83333 10C6.05435 10 6.26631 10.0878 6.42259 10.2441C6.57887 10.4004 6.66667 10.6123 6.66667 10.8333Z"
               fill="#ADA9BB" />
           </svg>
-  
+
           <span>Events</span>
         </a>
       </div>
-  
+
       <div class="nav-item">
         <a class="nav-link ">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,38 +78,53 @@
               d="M15.8333 1.66666C15.8333 1.66666 17.5 2.66666 17.5 4.99999C17.5 7.33332 15.8333 8.33332 15.8333 8.33332M14.1667 3.33332C14.1667 3.33332 15 3.83332 15 4.99999C15 6.16666 14.1667 6.66666 14.1667 6.66666"
               stroke="#ADA9BB" stroke-width="1.5" stroke-linecap="round" />
           </svg>
-  
-  
+
+
           <span>Speakers</span>
         </a>
       </div>
-  
+
       <div class="nav-item">
         <a class="nav-link ">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path style="fill: none;"
+            <path
               d="M2.5 8.33332C2.5 5.19082 2.5 3.61916 3.47667 2.64332C4.45333 1.66749 6.02417 1.66666 9.16667 1.66666H10.8333C13.9758 1.66666 15.5475 1.66666 16.5233 2.64332C17.4992 3.61999 17.5 5.19082 17.5 8.33332V11.6667C17.5 14.8092 17.5 16.3808 16.5233 17.3567C15.5467 18.3325 13.9758 18.3333 10.8333 18.3333H9.16667C6.02417 18.3333 4.4525 18.3333 3.47667 17.3567C2.50083 16.38 2.5 14.8092 2.5 11.6667V8.33332Z"
               stroke="#ADA9BB" stroke-width="1.5" />
-            <path style="fill: none;" d="M6.66666 8.33331H13.3333M6.66666 11.6666H10.8333" stroke="#ADA9BB"
-              stroke-width="1.5" stroke-linecap="round" />
+            <path d="M6.66669 8.33331H13.3334M6.66669 11.6666H10.8334" stroke="#ADA9BB" stroke-width="1.5"
+              stroke-linecap="round" />
           </svg>
-  
+
+          <span>Reports</span>
+        </a>
+      </div>
+
+      <div class="nav-item">
+        <a style="position: relative;" class="nav-link">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7.49998 13.9583C7.49998 13.9583 7.49998 16.0417 9.99998 16.0417C12.5 16.0417 12.5 13.9583 12.5 13.9583M14.375 8.33333V9.99999L16.0416 13.5417H3.95831L5.62498 9.99999V8.33333C5.62498 5.91708 7.58373 3.95833 9.99998 3.95833C12.4162 3.95833 14.375 5.91708 14.375 8.33333Z"
+              stroke="#ADA9BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+
+
           <span>Notifications</span>
           <div class="tip">3</div>
         </a>
       </div>
-  
+
       <div class="nav-item">
         <a class="nav-link ">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.37498 7.29166L6.45831 10L9.37498 12.7083M13.5416 7.29166L10.625 10L13.5416 12.7083"
-              stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M15.1894 8.74999C15.7127 9.39269 16.0274 10.2565 16.0274 11.3584C16.0274 12.3885 15.7524 13.2105 15.2889 13.8383C15.1208 14.0661 15.1562 14.5969 15.2906 14.8461C15.6121 15.4424 15.0046 16.0958 14.3443 15.9444C13.85 15.8311 13.3315 15.6778 12.8778 15.4722C12.7117 15.3969 12.5283 15.3665 12.3471 15.387C12.1219 15.4125 11.8922 15.425 11.6595 15.425C10.5797 15.425 9.56229 15.1538 8.78151 14.5833M12.6942 8.02502C12.6942 10.8296 10.6554 12.0917 8.32624 12.0917C8.09357 12.0917 7.86379 12.0791 7.63865 12.0536C7.45742 12.0331 7.27401 12.0635 7.10789 12.1388C6.65418 12.3445 6.13573 12.4978 5.64146 12.6111C4.98113 12.7625 4.37362 12.109 4.69515 11.5127C4.82951 11.2636 4.86493 10.7327 4.69681 10.505C4.23336 9.87717 3.95831 9.05515 3.95831 8.02502C3.95831 5.22041 5.99709 3.95833 8.32624 3.95833C10.6554 3.95833 12.6942 5.22041 12.6942 8.02502Z"
+              stroke="#ADA9BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-  
+
+
           <span>Messages</span>
         </a>
       </div>
-  
+
       <div class="nav-item">
         <a class="nav-link ">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,32 +135,31 @@
               d="M11.3259 8.6741C12.058 9.40625 12.058 10.5937 11.3259 11.3259C10.5938 12.058 9.40627 12.058 8.67412 11.3259C7.94197 10.5937 7.94197 9.40625 8.67412 8.6741C9.40627 7.94196 10.5938 7.94196 11.3259 8.6741Z"
               stroke="#ADA9BB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-  
-  
+
+
           <span>Settings</span>
         </a>
       </div>
-  
+
       <div class="nav-item nav-toggle">
-        <a class="nav-link ">
+        <a id="collapse-btn" class="nav-link ">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.37498 7.29166L6.45831 10L9.37498 12.7083M13.5416 7.29166L10.625 10L13.5416 12.7083"
               stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-  
-  
+
           <span>Collapse</span>
         </a>
       </div>
-  
+
       <a class="theme-switcher">
         <div class="theme-toggler">
           <div class="lever"></div>
         </div>
-  
+
         <span>Dark mode</span>
       </a>
-  
+
       <div class="profile-info">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_1138_3362)">
@@ -163,27 +181,376 @@
             </clipPath>
           </defs>
         </svg>
-  
+
         <span>Rudra Devi</span>
         <span>rudra.devi@gmail.com</span>
       </div>
     </div>
   </nav>
+  <!-- MAIN CONTENT -->
   <main>
     <div class="mobile-nav">
       <div class="logo">
         <span>Full Logo</span>
       </div>
-    
+
       <div id="nav-toggler">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 7H7M20 7H11M20 17H17M4 17H13M4 12H20" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M4 7H7M20 7H11M20 17H17M4 17H13M4 12H20" stroke="#64748B" stroke-width="1.5"
+            stroke-linecap="round" />
         </svg>
       </div>
     </div>
 
     <div class="content">
-      
+      <h2>
+        Welcome! here’s your summary
+      </h2>
+      <!-- METRICS -->
+      <div class="metrics">
+        <div class="metric">
+          <div>
+            <span>Total Events</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 8.66666V9.99999" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M8.33333 5.99999C8.33333 6.18409 8.1841 6.33332 8 6.33332C7.81591 6.33332 7.66667 6.18409 7.66667 5.99999C7.66667 5.81589 7.81591 5.66666 8 5.66666C8.1841 5.66666 8.33333 5.81589 8.33333 5.99999Z"
+                stroke="#64748B" />
+              <path
+                d="M12.8333 7.99999C12.8333 10.6694 10.6694 12.8333 8 12.8333C5.33062 12.8333 3.16667 10.6694 3.16667 7.99999C3.16667 5.33061 5.33062 3.16666 8 3.16666C10.6694 3.16666 12.8333 5.33061 12.8333 7.99999Z"
+                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <span>100,000</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <small class="green">+5.0%</small>
+          </div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <span>Active Speakers</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 8.66666V9.99999" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M8.33333 5.99999C8.33333 6.18409 8.1841 6.33332 8 6.33332C7.81591 6.33332 7.66667 6.18409 7.66667 5.99999C7.66667 5.81589 7.81591 5.66666 8 5.66666C8.1841 5.66666 8.33333 5.81589 8.33333 5.99999Z"
+                stroke="#64748B" />
+              <path
+                d="M12.8333 7.99999C12.8333 10.6694 10.6694 12.8333 8 12.8333C5.33062 12.8333 3.16667 10.6694 3.16667 7.99999C3.16667 5.33061 5.33062 3.16666 8 3.16666C10.6694 3.16666 12.8333 5.33061 12.8333 7.99999Z"
+                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <span>25</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5 5.83333V11.5H5.83333M11.3333 11.3333L4.5 4.5" stroke="#F43F5E" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <small class="red">-5.0%</small>
+          </div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <span>Total Registrations</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 8.66666V9.99999" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M8.33333 5.99999C8.33333 6.18409 8.1841 6.33332 8 6.33332C7.81591 6.33332 7.66667 6.18409 7.66667 5.99999C7.66667 5.81589 7.81591 5.66666 8 5.66666C8.1841 5.66666 8.33333 5.81589 8.33333 5.99999Z"
+                stroke="#64748B" />
+              <path
+                d="M12.8333 7.99999C12.8333 10.6694 10.6694 12.8333 8 12.8333C5.33062 12.8333 3.16667 10.6694 3.16667 7.99999C3.16667 5.33061 5.33062 3.16666 8 3.16666C10.6694 3.16666 12.8333 5.33061 12.8333 7.99999Z"
+                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <span>300</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <small class="green">+5.0%</small>
+          </div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <span>Total Revenue</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 8.66666V9.99999" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M8.33333 5.99999C8.33333 6.18409 8.1841 6.33332 8 6.33332C7.81591 6.33332 7.66667 6.18409 7.66667 5.99999C7.66667 5.81589 7.81591 5.66666 8 5.66666C8.1841 5.66666 8.33333 5.81589 8.33333 5.99999Z"
+                stroke="#64748B" />
+              <path
+                d="M12.8333 7.99999C12.8333 10.6694 10.6694 12.8333 8 12.8333C5.33062 12.8333 3.16667 10.6694 3.16667 7.99999C3.16667 5.33061 5.33062 3.16666 8 3.16666C10.6694 3.16666 12.8333 5.33061 12.8333 7.99999Z"
+                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <span>$500,000</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <small class="green">+5.0%</small>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <h3>Event Registrations per month</h3>
+      <section class="charts">
+        <div class="chart">
+          <canvas id="bar-chart"></canvas>
+        </div>
+        <div class="carousel">
+          <a id="slideleft-btn">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.625 4.375L4.875 6L6.625 7.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a id="slideright-btn">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.375 4.375L7.125 6L5.375 7.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <div class="carousel-items">
+            <div class="carousel-item">
+              <img decoding="async"
+                srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255780/dev-assessment/carousel-1.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255780/dev-assessment/carousel-1.png 2x"
+                src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255780/dev-assessment/carousel-1.png"
+                alt="First slide image">
+              <h6>Latest News & Updates</h6>
+              <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit
+                nisi, fermentum
+                erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+            </div>
+
+            <div class="carousel-item">
+              <img decoding="async"
+                srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255828/dev-assessment/carousel-2.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255828/dev-assessment/carousel-2.png 2x"
+                src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255828/dev-assessment/carousel-2.png"
+                alt="Second slide image">
+              <h6>Latest News & Updates</h6>
+              <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit
+                nisi,
+                fermentum
+                erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+            </div>
+
+            <div class="carousel-item">
+              <img decoding="async"
+                srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255879/dev-assessment/carousel-3.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255879/dev-assessment/carousel-3.png 2x"
+                src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255879/dev-assessment/carousel-3.png"
+                alt="Third slide image">
+              <h6>Latest News & Updates</h6>
+              <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit
+                nisi,
+                fermentum
+                erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+            </div>
+
+          </div>
+          <div class="thumbs">
+          </div>
+        </div>
+      </section>
+
+      <h3>Events History</h3>
+      <section class="event-history">
+        <div class="options-row">
+          <div class="filter">
+            <div class="join">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.0417 16.0417L12.9167 12.9167M3.95833 9.16667C3.95833 6.29019 6.29018 3.95834 9.16666 3.95834C12.0431 3.95834 14.375 6.29019 14.375 9.16667C14.375 12.0432 12.0431 14.375 9.16666 14.375C6.29018 14.375 3.95833 12.0432 3.95833 9.16667Z"
+                  stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <input type="text">
+            </div>
+
+            <div class="dropdown">
+              <input type="checkbox" name="date-dropdown" id="date-dropdown">
+              <div class="dropdown-btn">
+                <span>Date</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1667 7.16666L8 9.5L5.83334 7.16666" stroke="#334155" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <input type="checkbox" name="status-dropdown" id="status-dropdown">
+              <div class="dropdown-btn">
+                <span>Status</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1667 7.16666L8 9.5L5.83334 7.16666" stroke="#334155" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <input type="checkbox" name="name-dropdown" id="name-dropdown">
+              <div class="dropdown-btn">
+                <span>Name</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1667 7.16666L8 9.5L5.83334 7.16666" stroke="#334155" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <h5>Displaying 100 results</h5>
+
+          </div>
+          <div class="sort">
+            <span>Sort:</span>
+            <div class="dropdown">
+              <input type="checkbox" name="name-dropdown" id="name-dropdown">
+              <div class="dropdown-btn">
+                <span>Most Recent</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1667 7.16666L8 9.5L5.83334 7.16666" stroke="#334155" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <button>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10.4166 5.83333C10.4166 6.06345 10.2301 6.25 9.99998 6.25C9.76986 6.25 9.58331 6.06345 9.58331 5.83333C9.58331 5.60321 9.76986 5.41666 9.99998 5.41666C10.2301 5.41666 10.4166 5.60321 10.4166 5.83333Z"
+                  stroke="#141414" />
+                <path
+                  d="M10.4166 10C10.4166 10.2301 10.2301 10.4167 9.99998 10.4167C9.76986 10.4167 9.58331 10.2301 9.58331 10C9.58331 9.76988 9.76986 9.58333 9.99998 9.58333C10.2301 9.58333 10.4166 9.76988 10.4166 10Z"
+                  stroke="#141414" />
+                <path
+                  d="M10.4166 14.1667C10.4166 14.3968 10.2301 14.5833 9.99998 14.5833C9.76986 14.5833 9.58331 14.3968 9.58331 14.1667C9.58331 13.9365 9.76986 13.75 9.99998 13.75C10.2301 13.75 10.4166 13.9365 10.4166 14.1667Z"
+                  stroke="#141414" />
+              </svg>
+
+            </button>
+
+            <button>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3.16663 9.83333V10.8333C3.16663 11.9379 4.06206 12.8333 5.16663 12.8333H10.8333C11.9379 12.8333 12.8333 11.9379 12.8333 10.8333V9.83333M7.99996 9.5V3.16666M7.99996 9.5L5.83329 7.16666M7.99996 9.5L10.1666 7.16666"
+                  stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>Export</span>
+            </button>
+
+          </div>
+        </div>
+
+        <div class="table">
+          <div class="head">
+            <div class="th">
+              Event Name
+            </div>
+            <div class="th">
+              Date
+            </div>
+            <div class="th">
+              Speaker
+            </div>
+            <div class="th">
+              Status
+            </div>
+          </div>
+          <div class="trow">
+            <div class="td">
+              Cloud Innovation Summit
+            </div>
+            <div class="td">
+              2024-10-15
+            </div>
+            <div class="td">
+              Jane Doe
+            </div>
+            <div class="td">
+              <div class="bubble completed">
+                <div class="dot"></div>
+                Completed
+              </div>
+            </div>
+          </div>
+
+          <div class="trow">
+            <div class="td">
+              Blockchain Revolution Conference
+            </div>
+            <div class="td">
+              2024-10-15
+            </div>
+            <div class="td">
+              Dr. Peter Smith
+            </div>
+            <div class="td">
+              <div class="bubble in-progress">
+                <div class="dot"></div>
+                In Progress
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="limits">
+          <div class="pagination">
+            <button class="prev">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.0417 7.29169L8.125 10L11.0417 12.7084" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+    stroke-linejoin="round" />
+</svg>
+
+            </button>
+            <div class="page">
+              1
+            </div>
+            <div class="page">
+              2
+            </div>
+            <div class="page">
+              3
+            </div>
+            <button>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.95833 7.29169L11.875 10L8.95833 12.7084" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+
+            </button>
+          </div>
+
+          <div class="rows">
+            <span>Show:</span>
+
+            <div class="dropdown">
+              <input type="checkbox" name="date-dropdown" id="date-dropdown">
+              <div class="dropdown-btn">
+                <span>10 rows</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1667 7.16666L8 9.5L5.83334 7.16666" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
   <script type="module" src="src/main.ts"></script>

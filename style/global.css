@@ -6,6 +6,7 @@
   --success: #10b981;
   --error: #f43f5e;
   --accent: #F1F5F9;
+  --neutral: #64748B;
   --b-1: #ffffff;
   --b-2: #ffffff;
   --b-3: #E2E8F0;
@@ -23,18 +24,28 @@
 
 html.dark {
     --bc: #fff;
+    --secondary: #8576ff;
   --b-1: #383544;
   --b-2: #484554;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--b-1);
   color: var(--bc);
   font-family: "Inter", sans-serif;
   display: flex;
   min-height: 100vh;
   width: 100vw;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
 }
 
 main {
@@ -50,7 +61,11 @@ main {
     .mobile-nav {
             padding: 1rem;
             display: flex;
+            border-bottom: 1px solid var(--b-3);
             align-items: center;
             justify-content: space-between;
         }
+    .nav-toggle{
+      display: none;
+    }
 }

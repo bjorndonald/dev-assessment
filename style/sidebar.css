@@ -1,5 +1,6 @@
 nav {
-    width: 240px;
+    width: 100%;
+    max-width: 240px;
     min-height: 100vh;
     
     display: flex;
@@ -7,6 +8,11 @@ nav {
     gap: 8px;
     border-right: 1px solid var(--b-3);
     padding: 0.5rem;
+}
+
+.dark nav {
+    border-right: 0;
+    background-color: var(--b-2);
 }
 
  .full-logo {
@@ -52,8 +58,14 @@ nav .nav-list .nav-item .nav-link{
     border-radius: 2px;
 }
 
+
+
 nav .nav-list .nav-item .nav-link.active {
-    background-color: #FCF7FF;
+    background-color: var(--secondary);
+}
+
+.dark nav .nav-list .nav-item .nav-link.active svg path {
+    stroke: #fff;
 }
 
 nav .nav-list .nav-item .nav-link.active svg {
@@ -64,9 +76,75 @@ nav .nav-list .nav-item .nav-link.active svg {
 }
 
 nav .nav-list span {
-    color: #334155;
     font-size: 14px;
     line-height: 20px;
+}
+
+nav .nav-link:hover {
+    background-color: var(--b-3);
+    cursor: pointer;
+}
+
+nav.collapsed {
+    width: 4rem;
+    /* transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-property: all;
+    transform-origin: left; */
+    padding: 0.5rem 1rem;
+    padding-right: 0.75rem;
+}
+
+nav.collapsed span {
+    display: none;
+}
+
+nav.collapsed .theme-switcher{
+    display: none;
+}
+
+nav.collapsed .tip {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1px;
+    width: 6px;
+    height: 6px;
+    color: var(--error);
+    border-radius: 50%;
+}
+
+nav.collapsed .nav-list .nav-item .nav-link svg path {
+    stroke: #64748B;
+}
+
+nav.collapsed .nav-link {
+   justify-content: center;
+}
+
+nav.collapsed .profile-info {
+    padding-right: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+nav.collapsed .full-logo {
+    justify-content: center;
+}
+
+nav.collapsed .logo {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+
+nav.collapsed #collapse-btn svg {
+    -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+}
+
+#nav-toggler{
+    display: none;
 }
 
 .nav-toggle svg {
@@ -107,6 +185,7 @@ nav .nav-list span {
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .theme-switcher .theme-toggler {
@@ -115,6 +194,9 @@ nav .nav-list span {
     background-color: var(--b-3);
     border-radius: 100px;
     padding: 2px;
+    transition: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
     position: relative;
 }
 
@@ -129,30 +211,32 @@ nav .nav-list span {
     left: 4px;
 }
 
-.theme-switcher .theme-toggler.dark .lever {
-left: auto;
-right: 0;
+.dark .theme-switcher .theme-toggler .lever { 
+    left: auto;
+    right: 4px;
 }
 
 .tip{
     width: 24px;
     height: 24px;
+    margin-left: auto;
     background-color: var(--error);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    border-radius: 50%;
     font-size: 12px;
-    line-height: 16px;
+        color: white;
+        line-height: 16px;
+    border-radius: 50%;
+    
 }
-
-
 
 @media screen and (max-width: 475px) {
     nav {
         position: fixed;
         top: 0;
+        padding: 8px;
+        max-width: auto;
         width: calc(100vw - 1rem);
         min-height: 100vh;
         transition-duration: 300ms;
@@ -163,4 +247,8 @@ right: 0;
     nav.open {
         left: 0;
     }
+
+        #nav-toggler {
+            display: block;
+        }
 }
