@@ -3,7 +3,10 @@
 :root {
   --primary: #8576ff;
   --secondary: #fcf7ff;
-  --success: #10b981;
+  --success: #D1FAE5;
+  --success-content: #10b981;
+  --warning: #DBEAFE;
+    --warning-content: #3B82F6;
   --error: #f43f5e;
   --accent: #F1F5F9;
   --neutral: #64748B;
@@ -23,8 +26,8 @@
 } */
 
 html.dark {
-    --bc: #fff;
-    --secondary: #8576ff;
+  --bc: #fff;
+  --secondary: #8576ff;
   --b-1: #383544;
   --b-2: #484554;
 }
@@ -44,28 +47,111 @@ body {
   width: 100vw;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 
 main {
-    flex-grow: 1;
-    min-height: 100vh;
+  flex-grow: 1;
+  min-height: 100vh;
 }
 
-.mobile-nav{
-    display: none;
+.mobile-nav {
+  display: none;
 }
 
 @media screen and (max-width: 475px) {
-    .mobile-nav {
-            padding: 1rem;
-            display: flex;
-            border-bottom: 1px solid var(--b-3);
-            align-items: center;
-            justify-content: space-between;
-        }
-    .nav-toggle{
-      display: none;
-    }
+  .mobile-nav {
+    padding: 1rem;
+    display: flex;
+    border-bottom: 1px solid var(--b-3);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
 }
+
+/* TYPOGRAPHY */
+small {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+span, a {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+  height: 36px;
+}
+
+.dropdown input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+}
+
+.dropdown-btn {
+  padding: 8px 16px;
+  display: flex;
+  border: 1px solid var(--b-3);
+  border-radius: 2px;
+  gap: 8px;
+}
+
+.dropdown-btn span {
+  font-size: 14px;
+  line-height: 20px;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.dropdown-btn svg {
+  width: 20px;
+  height: 20px;
+  
+}
+
+.dropdown .dropdown-list {
+  display: none;
+  position: absolute;
+    top: 110%;
+    width: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid var(--b-3);
+    padding: 8px;
+    flex-direction: column;
+}
+.dropdown .dropdown-list .dropdown-item {
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--bc);
+  cursor: pointer;
+}
+
+.dropdown .dropdown-list .dropdown-item:hover {
+  background-color: var(--b-2);
+}
+
+.dropdown input:checked ~ .dropdown-list {
+  display: flex;
+}
+

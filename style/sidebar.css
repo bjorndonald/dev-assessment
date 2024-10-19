@@ -38,6 +38,14 @@ nav {
     font-size: 12px;
 }
 
+nav.collapsed .logo {
+    width: 100%;
+}
+
+nav.collapsed .full-logo {
+   padding: 1rem 0;
+}
+
 nav .nav-list {
     display: flex;
     gap: 8px; 
@@ -50,7 +58,7 @@ nav .nav-list .nav-item{
 }
 
 nav .nav-list .nav-item .nav-link{
-    width: calc(100% - 1rem);
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -68,11 +76,18 @@ nav .nav-list .nav-item .nav-link.active {
     stroke: #fff;
 }
 
+nav .nav-list .nav-item .nav-link svg {
+    width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        flex-shrink: 0;
+}
+
 nav .nav-list .nav-item .nav-link.active svg {
     stroke: var(--primary);
     fill: var(--primary);
-    width: 20px;
-    height: 20px;
+    
 }
 
 nav .nav-list span {

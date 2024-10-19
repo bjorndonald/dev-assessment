@@ -136,30 +136,38 @@ document.addEventListener('DOMContentLoaded', function () {
       scales: {
         x: {
           beginAtZero: true,
+          border: {
+            dash: [5, 5],
+            color: "#E2E8F0"
+          },
           grid: {
-            
-            offset: true,
+            drawTicks: false,
+            // offset: true,
+            drawOnChartArea: true, // Allow gridlines to be drawn on the chart
             tickBorderDash: [5, 5] // Dashed gridlines for x-axis (5px dash, 5px gap)
           },
-          offset: false
+          offset: true
         },
         y: {
           min: 0,
           max: 1000,
           ticks: {
+            // font: {
+            //   size: 10,
+            //   lineHeight: 12,
+            // },
+            color: "#64748B",
             padding: 20,
             stepSize: 200,
           },
           beginAtZero: true,
           border: {
-            
+            dash: [5,5],
             color: "#fff"
           },
           grid: {
-            drawTicks: true,
-            
-            color: "#E2E8F0"
-            
+            drawTicks: false,
+            color: "#E2E8F0",
           }
         }
       }
