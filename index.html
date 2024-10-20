@@ -223,7 +223,7 @@
             </svg>
           </div>
           <div>
-            <span>100,000</span>
+            <h1>100,000</h1>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" />
@@ -247,7 +247,7 @@
             </svg>
           </div>
           <div>
-            <span>25</span>
+            <h1>25</h1>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.5 5.83333V11.5H5.83333M11.3333 11.3333L4.5 4.5" stroke="#F43F5E" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" />
@@ -271,7 +271,7 @@
             </svg>
           </div>
           <div>
-            <span>300</span>
+            <h1>300</h1>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" />
@@ -295,7 +295,7 @@
             </svg>
           </div>
           <div>
-            <span>$500,000</span>
+            <h1>$500,000</h1>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.5 10.1667V4.5H5.83333M11.3333 4.66667L4.5 11.5" stroke="#10B981" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" />
@@ -325,7 +325,7 @@
             </svg>
           </a>
           <div class="carousel-items">
-            <div class="carousel-item">
+            <div id="carousel0" class="carousel-item">
               <img decoding="async"
                 srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255780/dev-assessment/carousel-1.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255780/dev-assessment/carousel-1.png 2x"
                 src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255780/dev-assessment/carousel-1.png"
@@ -336,7 +336,7 @@
                 erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
             </div>
 
-            <div class="carousel-item">
+            <div id="carousel1" class="carousel-item">
               <img decoding="async"
                 srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255828/dev-assessment/carousel-2.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255828/dev-assessment/carousel-2.png 2x"
                 src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255828/dev-assessment/carousel-2.png"
@@ -348,7 +348,7 @@
                 erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
             </div>
 
-            <div class="carousel-item">
+            <div id="carousel2" class="carousel-item">
               <img decoding="async"
                 srcset="https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255879/dev-assessment/carousel-3.png 1x, https://res.cloudinary.com/b-bassey/image/upload/w_400,q_75/v1729255879/dev-assessment/carousel-3.png 2x"
                 src="https://res.cloudinary.com/b-bassey/image/upload/w_600,q_75/v1729255879/dev-assessment/carousel-3.png"
@@ -430,7 +430,7 @@
               </div>
             </div>
 
-            <button>
+            <button class="menu">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10.4166 5.83333C10.4166 6.06345 10.2301 6.25 9.99998 6.25C9.76986 6.25 9.58331 6.06345 9.58331 5.83333C9.58331 5.60321 9.76986 5.41666 9.99998 5.41666C10.2301 5.41666 10.4166 5.60321 10.4166 5.83333Z"
@@ -446,7 +446,7 @@
             </button>
 
             <div>
-<button>
+<button class="export">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M3.16663 9.83333V10.8333C3.16663 11.9379 4.06206 12.8333 5.16663 12.8333H10.8333C11.9379 12.8333 12.8333 11.9379 12.8333 10.8333V9.83333M7.99996 9.5V3.16666M7.99996 9.5L5.83329 7.16666M7.99996 9.5L10.1666 7.16666"
@@ -593,6 +593,56 @@
 
     </div>
   </main>
+  <dialog id="event-modal" class="modal">
+    <!-- <div class="modal-backdrop"></div> -->
+    <div class="modal-content">
+      <a class="modal-close">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.625 3.375L3.375 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path d="M3.375 3.375L8.625 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+      <div class="modal-header">
+        <h4>Event Name</h4>
+        <span>Event Date</span>
+      </div>
+      <div class="modal-body">
+        <p>Event Description</p>
+        <div class="avatars">
+          <div class="avatar">
+            <img src="/avatar_1.png" alt="Avatar 1">
+          </div>
+          <div class="avatar">
+            <img src="/avatar_2.png" alt="Avatar 2">
+          </div>
+          <div class="avatar">
+            <img src="/avatar_3.png" alt="Avatar 3">
+          </div>
+        </div>
+        <p>
+          3 Guest Speakers: Speaker name A, Speaker name B, Speaker name C.
+          300 Attendees
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="edit-btn">
+          Edit
+        </button>
+
+        <div class="modal-actions">
+          <button class="delete-btn">
+            Delete
+          </button>
+          <button class="mark-btn">
+            Mark as completed
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <script type="module" src="src/main.ts"></script>
 </body>
 

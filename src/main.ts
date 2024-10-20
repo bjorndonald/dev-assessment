@@ -32,9 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (document.documentElement?.classList.contains("dark")) {
       document.documentElement.classList.remove("dark")
       themeText.textContent = "Light Mode"
+      setupLightMode()
     } else {
       document.documentElement.classList.add("dark")
       themeText.textContent = "Dark Mode"
+      setupDarkMode()
     }
   })
 
@@ -60,62 +62,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  const slideArr = document.querySelectorAll(".carousel-item")
+  const slideArr = document.querySelectorAll(".carousel-item") as NodeListOf<HTMLDivElement>
   const thumbsParent = document.querySelector(".thumbs")
   slideArr.forEach((e, i) => {
+    if(i !==0)
+    e.style.opacity = 0 +""
     const thumb = document.createElement("div")
     thumb.className = i === 0? "thumb active": "thumb"
     thumb.id = "thumb"+i
     thumbsParent?.append(thumb)
   })
 
-  const slideLeftBtn = document.getElementById("slideleft-btn") as HTMLDivElement
-  slideLeftBtn.addEventListener("click", (e) => {
-    const slides = document.querySelector(".carousel-items")
-    if(!slides) return
-    const slide = document.querySelectorAll(".carousel-item")
-    if (!slide) return
-    const widthofSlide = slide[0].clientWidth
-    var style = window.getComputedStyle(slides);
-    var matrix = new WebKitCSSMatrix(style.transform);
-    const posofSlides = matrix.m41
-    if (posofSlides > (-1)){
-      return 
-    }
-    gsap.to(slides, {
-      x: "+=" + widthofSlide,
+  var index = 0
+
+  function showSlide() {
+    gsap.to(".carousel-item", {
+      opacity: 0,
       duration: 0.5,
       ease: "power1.in"
     })
-    const index = Math.abs(posofSlides) / widthofSlide
+
+    gsap.to("#carousel"+index, {
+      opacity: 1,
+      duration: 0.5,
+      ease: "power1.in"
+    })
+  }
+
+  const slideLeftBtn = document.getElementById("slideleft-btn") as HTMLDivElement
+  slideLeftBtn.addEventListener("click", (e) => {
+    if(index == 0)
+      index = 2
+    else index -= 1
+    showSlide()
     changeThumbs(index)
   })
 
   const slideRightBtn = document.getElementById("slideright-btn") as HTMLDivElement
   slideRightBtn.addEventListener("click", () => {
-    
-    const slides = document.querySelector(".carousel-items")
-    if (!slides) return
-    const slide = document.querySelectorAll(".carousel-item")
-    if (!slide) return
-    
-    const widthofSlide = slide[0].clientWidth
-    var style = window.getComputedStyle(slides);
-    var matrix = new WebKitCSSMatrix(style.transform);
-    const posofSlides = matrix.m41
-    if (posofSlides < -((slide.length - 1)*widthofSlide - 1)) {
-      return
-    }
-    const index = Math.abs(posofSlides) / widthofSlide
+    if (index == 2)
+      index = 0
+    else index += 1
+    showSlide()
     changeThumbs(index)
   })
-
-
-  
     
   Chart.register(LinearScale, CategoryScale, BarController, BarElement, Title, Tooltip, Legend);
-  const ctx = document.getElementById('bar-chart') as HTMLCanvasElement;
-  const myChart = new Chart(ctx, {
+  const chartElem = document.getElementById('bar-chart') as HTMLCanvasElement;
+  const myChart = new Chart(chartElem, {
     type: 'bar',
     data: {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', "Jul", "Aug", "Sep","Oct", "Nov", "Dec"],
@@ -131,20 +125,23 @@ document.addEventListener('DOMContentLoaded', function () {
       plugins: {
         legend: {
           display: false // Disable the legend
+        },
+        tooltip: {
+          enabled: false
         }
       },
       scales: {
         x: {
           beginAtZero: true,
           border: {
-            dash: [5, 5],
+            dash: [3, 3],
             color: "#E2E8F0"
           },
           grid: {
             drawTicks: false,
             // offset: true,
             drawOnChartArea: true, // Allow gridlines to be drawn on the chart
-            tickBorderDash: [5, 5] // Dashed gridlines for x-axis (5px dash, 5px gap)
+            tickBorderDash: [3, 3] // Dashed gridlines for x-axis (5px dash, 5px gap)
           },
           offset: true
         },
@@ -157,12 +154,12 @@ document.addEventListener('DOMContentLoaded', function () {
             //   lineHeight: 12,
             // },
             color: "#64748B",
-            padding: 20,
+            padding: 10,
             stepSize: 200,
           },
           beginAtZero: true,
           border: {
-            dash: [5,5],
+            dash: [3, 3],
             color: "#fff"
           },
           grid: {
@@ -173,6 +170,91 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  const setupLightMode = () => {
+    myChart.options.scales = {
+      x: {
+        beginAtZero: true,
+        border: {
+          dash: [3, 3],
+          color: "#E2E8F0"
+        },
+        grid: {
+          drawTicks: false,
+          // offset: true,
+          drawOnChartArea: true, // Allow gridlines to be drawn on the chart
+          tickBorderDash: [3, 3] // Dashed gridlines for x-axis (5px dash, 5px gap)
+        },
+        offset: true
+      },
+      y: {
+        min: 0,
+        max: 1000,
+        ticks: {
+          // font: {
+          //   size: 10,
+          //   lineHeight: 12,
+          // },
+          color: "#64748B",
+          padding: 10,
+          stepSize: 200,
+        },
+        beginAtZero: true,
+        border: {
+          dash: [3, 3],
+          color: "#fff"
+        },
+        grid: {
+          drawTicks: false,
+          color: "#E2E8F0",
+        }
+      }
+    }
+
+    myChart.update()
+  }
+
+  const setupDarkMode = () => {
+    myChart.options.scales = {
+      x: {
+        beginAtZero: true,
+        border: {
+          dash: [5, 5],
+          color: "#fff"
+        },
+        ticks: {
+          color: "#fff",
+        },
+        grid: {
+          color: "#fff",
+          drawTicks: false,
+          drawOnChartArea: true,
+          tickBorderDash: [5, 5]
+        },
+        offset: true
+      },
+      y: {
+        min: 0,
+        max: 1000,
+        ticks: {
+          color: "#fff",
+          padding: 10,
+          stepSize: 200,
+        },
+        beginAtZero: true,
+        border: {
+          dash: [5, 5],
+          color: "#fff"
+        },
+        grid: {
+          drawTicks: false,
+          color: "#fff",
+        }
+      }
+    }
+
+    myChart.update()
+  }
 
 
 })
