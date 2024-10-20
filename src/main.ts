@@ -256,5 +256,37 @@ document.addEventListener('DOMContentLoaded', function () {
     myChart.update()
   }
 
+  const openEventModal = (e: Event) => {
+    const modalContent = document.querySelector(".modal-content") as HTMLDivElement
+    if (!modalContent) return
+    const firstCol = e.target as HTMLDivElement
+    const bounds = firstCol.getBoundingClientRect()
+    console.log(bounds)
+    modalContent.style.top = bounds.bottom + "px"
+    modalContent.style.left = bounds.left + 20 + "px"
+    const modal = document.querySelector(".modal")
+    if(!modal) return
+    modal.setAttribute("open", "true")
+  }
 
+  const closeEventModal = () => {
+    const modal = document.querySelector(".modal")
+    if (!modal) return
+    modal.removeAttribute("open")
+  }
+
+  const rows = document.querySelectorAll(".trow .td:first-child")
+
+  rows.forEach((e) => {
+    e.addEventListener(
+      "click",
+      openEventModal
+    )
+  })
+
+  const modalClose = document.querySelector(".modal-close")
+  modalClose?.addEventListener("click", closeEventModal)
+
+  const backdrop = document.querySelector(".modal-backdrop")
+  backdrop?.addEventListener("click", closeEventModal)
 })
