@@ -1,7 +1,53 @@
 import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, Title, Tooltip } from 'chart.js'
 import gsap from 'gsap'
+import events from './data'
 
 document.addEventListener('DOMContentLoaded', function () {
+  const tableDesktop = document.querySelector(".table.desktop")
+  const tableMobile = document.querySelector(".table.mobile")
+  events.map((x) => {
+    const trow = document.createElement("div")
+    trow.className = "trow"
+    trow.innerHTML = `
+      <div id="open-modal" class="td">
+        ${x.name}
+      </div>
+      <div class="td">
+        ${x.date}
+      </div>
+      <div class="td">
+        ${x.speaker}
+      </div>
+      <div class="td" data-status="${x.status}">
+        <div class="bubble ${x.status.toLowerCase().replace(" ", "-")}">
+          <div class="dot"></div>
+          ${x.status}
+        </div>
+      </div>
+    `
+
+    const detail = document.createElement("details")
+    detail.innerHTML = `
+      <summary>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.75 8.75L14.25 12L10.75 15.25" stroke="#334155" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span class="name" id="open-modal">${x.name}</span>
+        <div data-status="${x.status}" class="bubble ${x.status.toLowerCase().replace(" ", "-")}">
+          In Progress
+        </div>
+      </summary>
+      <div class="info">
+        <span class="speaker">${x.speaker}</span>
+        <span class="date">${x.date}</span>
+      </div>
+    `
+
+    tableDesktop?.append(trow)
+    tableMobile?.append(detail)
+  })
+
   function changeThumbs(newIndex: number) {
     const thumbs = document.querySelectorAll(".thumb")
     thumbs.forEach((e) => {
@@ -55,10 +101,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   collapseBtn.addEventListener("click", () => {
     const sidebar = document.getElementById("sidebar") as HTMLDivElement
+    const main = document.querySelector("main") as HTMLDivElement
     if (sidebar?.classList.contains("collapsed")) {
       sidebar.classList.remove("collapsed")
+      main.style.paddingLeft = 240 + 32 + "px"
     } else {
       sidebar.classList.add("collapsed")
+      main.style.paddingLeft = 64 + 32 + "px"
     }
   })
 
@@ -89,23 +138,31 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  const slideLeftBtn = document.getElementById("slideleft-btn") as HTMLDivElement
-  slideLeftBtn.addEventListener("click", (e) => {
-    if(index == 0)
+  const slideLeft = () => {
+    if (index == 0)
       index = 2
     else index -= 1
     showSlide()
     changeThumbs(index)
-  })
+  }
 
-  const slideRightBtn = document.getElementById("slideright-btn") as HTMLDivElement
-  slideRightBtn.addEventListener("click", () => {
+  const slideLeftBtn = document.getElementById("slideleft-btn") as HTMLDivElement
+  slideLeftBtn.addEventListener("click", slideLeft)
+
+  const slideRight = () => {
     if (index == 2)
       index = 0
     else index += 1
     showSlide()
     changeThumbs(index)
-  })
+  }
+
+  const slideRightBtn = document.getElementById("slideright-btn") as HTMLDivElement
+  slideRightBtn.addEventListener("click", slideRight)
+
+  setInterval(() => {
+    slideRight()
+  }, 3000);
     
   Chart.register(LinearScale, CategoryScale, BarController, BarElement, Title, Tooltip, Legend);
   const chartElem = document.getElementById('bar-chart') as HTMLCanvasElement;
@@ -261,9 +318,43 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!modalContent) return
     const firstCol = e.target as HTMLDivElement
     const bounds = firstCol.getBoundingClientRect()
-    console.log(bounds)
-    modalContent.style.top = bounds.bottom + "px"
-    modalContent.style.left = bounds.left + 20 + "px"
+    const eventName = document.querySelector(".modal-header h4") as HTMLDivElement
+    const eventDate = document.querySelector(".modal-header span") as HTMLDivElement
+    const eventSpeaker = document.querySelector(".modal-body p span") as HTMLDivElement
+    const eventBtn = document.querySelector(".modal-footer .mark-btn") as HTMLDivElement
+
+
+    if(window.innerWidth > 475){
+      modalContent.style.top = bounds.bottom + "px"
+      modalContent.style.left = bounds.left + 20 + "px"
+      const nameElem = firstCol
+      eventName.textContent = nameElem.textContent
+
+      const speakerElem = firstCol.parentElement?.parentElement?.children.item(1)?.children.item(0) as HTMLSpanElement
+      eventSpeaker.textContent = speakerElem.textContent
+
+      const dateElem = firstCol.parentElement?.parentElement?.children.item(1)?.children.item(1) as HTMLSpanElement
+      eventDate.textContent = dateElem.textContent
+
+      const btnElem = firstCol.parentElement?.children.item(1) as HTMLSpanElement
+      eventBtn.textContent = btnElem.textContent
+    } else {
+      const cols = firstCol.parentElement?.children
+      if (!cols)
+        return
+      
+      const nameElem = cols.item(0) as HTMLDivElement
+      eventName.textContent = nameElem.textContent
+      const dateElem = cols.item(1) as HTMLDivElement
+      eventDate.textContent = dateElem.textContent
+      const speakerElem = cols.item(2) as HTMLDivElement
+      eventSpeaker.textContent = speakerElem.textContent
+      const btnElem = cols.item(3) as HTMLDivElement
+      if (btnElem.getAttribute("data-status") == "Completed")
+        eventBtn.textContent = "Mark as In progress"
+      else eventBtn.textContent = "Mark as Completed"
+    }
+
     const modal = document.querySelector(".modal")
     if(!modal) return
     modal.setAttribute("open", "true")
@@ -275,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.removeAttribute("open")
   }
 
-  const rows = document.querySelectorAll(".trow .td:first-child")
+  const rows = document.querySelectorAll("#open-modal")
 
   rows.forEach((e) => {
     e.addEventListener(

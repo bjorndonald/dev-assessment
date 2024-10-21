@@ -250,6 +250,9 @@ span, a {
 
 @media screen and (max-width: 475px) {
   .modal-content {
+    position: relative;
+    margin: 0 auto;
+    max-height: none;
     max-width: calc(100vw - 40px);
   }
 }
@@ -324,26 +327,46 @@ span, a {
   gap: 10px;
 }
 
-.modal-footer .modal-actions .edit-btn {
+.modal-footer button {
+  --bg-opacity: 1;
   padding: 0.5rem 1rem;
   border-radius: 2px;
+  cursor: pointer;
+}
+
+.modal-footer .edit-btn {
+  background-color: var(--b-1 );
   border: 1px solid var(--b-3);
 }
 
 .modal-footer .modal-actions .delete-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 2px;
   color: #fff;
   background-color: var(--error);
   border: 1px solid var(--error);
 }
 
-.modal-footer .modal-actions .delete-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 2px;
+.modal-footer .modal-actions .mark-btn {
   color: #fff;
   background-color: var(--primary);
   border: 1px solid var(--primary);
+}
+
+.modal-footer button:hover {
+  --bg-opacity: 0.35;
+}
+
+@media screen and (max-width: 475px) {
+    .modal-footer {
+      flex-direction: column;
+    }
+
+    .modal-footer button{
+      width: 100%;
+    }
+
+    .modal-footer .modal-actions {
+      flex-direction: column;
+    }
 }
 
 .avatars {

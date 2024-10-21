@@ -112,6 +112,10 @@ nav.collapsed {
     padding-right: 0.75rem;
 }
 
+nav.collapsed .nav-link svg path {
+    stroke: var(--neutral);
+}
+
 nav.collapsed span {
     display: none;
 }

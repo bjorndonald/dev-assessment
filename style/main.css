@@ -39,11 +39,14 @@ main h2 {
 }
 
 .metric {
+    cursor: pointer;
     border: 1px solid var(--b-3);
     border-radius: 2px;
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    position: relative;
+
 }
 
 .dark .metric {
@@ -51,7 +54,127 @@ main h2 {
     background-color: var(--b-2);
 }
 
+.metric:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--primary);
+    width: 100%;
+    transition: all;
+
+    animation-name: bgout;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+}
+
+@keyframes bgin {
+    from {
+        height: 0%;
+    }
+
+    to {
+        height: 100%;
+    }
+}
+
+@keyframes hin {
+    40% {
+        color: var(--bc)
+    }
+
+    100% {
+        color: #fff !important;
+    }
+}
+
+@keyframes spanin {
+    40% {
+        color: var(--neutral);
+        stroke: var(--neutral)
+    }
+
+    100% {
+        stroke: #fff;
+        color: #fff !important;
+    }
+}
+
+@keyframes bgout {
+    from {
+        height: 100%;
+    }
+
+    to {
+        height: 0%;
+    }
+}
+
+@keyframes spanout {
+    40% {
+        stroke: #fff;
+        color: #fff !important;
+    }
+
+    100% {
+        stroke: var(--neutral);
+        color: var(--neutral) !important;
+    }
+}
+
+@keyframes hout {
+    40% {
+        stroke: #fff;
+        color: #fff !important;
+    }
+
+    100% {
+        stroke: var(--bc);
+        color: var(--bc) !important;
+    }
+}
+
+.metric:hover h1{
+color: #fff !important;
+    animation-name: hin;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+}
+.metric:hover span {
+    color: #fff !important;
+    animation-name: spanin;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+}
+
+.metric:hover div:first-child svg path {
+    
+    color: #fff !important;
+    animation-name: spanin;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+}
+
+.metric:hover svg path {
+    stroke: #fff !important;
+}
+
+.metric:hover::before {
+    animation-name: bgin;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+    height: 100%;
+}
+
 .metric div {
+    position: relative;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -59,11 +182,19 @@ main h2 {
 
 .metric h1 {
     color: var(--bc);
+    animation-name: hout;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
     font-size: 20px;
     line-height: 32px;
 }
 
 .metric div span {
+    animation-name: spanout;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
