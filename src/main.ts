@@ -2,10 +2,24 @@ import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, T
 import gsap from 'gsap'
 import events from './data'
 
-document.addEventListener('DOMContentLoaded', function () {
+const setUpTable = (data: {
+  name: string;
+  date: string;
+  speaker: string;
+  status: "Completed" | "In Progress";
+}[]) => {
+  const tableRows = document.querySelectorAll(".table .trow")
+  tableRows.forEach(e => {
+    e.remove()
+  })
+  const tableDetails = document.querySelectorAll(".table details")
+  tableDetails.forEach(e => {
+    e.remove()
+  })
+
   const tableDesktop = document.querySelector(".table.desktop")
   const tableMobile = document.querySelector(".table.mobile")
-  events.map((x) => {
+  data.map((x) => {
     const trow = document.createElement("div")
     trow.className = "trow"
     trow.innerHTML = `
@@ -47,7 +61,74 @@ document.addEventListener('DOMContentLoaded', function () {
     tableDesktop?.append(trow)
     tableMobile?.append(detail)
   })
+}
 
+const handleSearch = (e: Event) => {
+  const input = e.target as HTMLInputElement
+  setUpTable(events.filter(x => x.name.includes(input.value)))
+}
+
+const handleStatusClick = (e: Element) => {
+  const statusText = document.querySelector(".status.dropdown .dropdown-btn span")
+  if(!statusText) return
+  statusText.textContent = e.textContent
+  console.log(e.textContent?.trim())
+  if (e.textContent === "Status"){
+    setUpTable(events)
+  } else
+  setUpTable(events.filter(x => x.status.toLowerCase().includes(e.textContent?.toLowerCase().trim() ??"")))
+  const statusCheck = document.querySelector(".status.dropdown input") as HTMLInputElement
+  statusCheck.click()
+}
+
+const handleNameClick = (e: Element) => {
+  const nameText = document.querySelector(".name.dropdown .dropdown-btn span")
+  if (!nameText) return
+  const textContent = e.textContent?.trim().toLowerCase()
+  nameText.textContent = e.textContent
+  if(e.textContent === "Name")
+    setUpTable(events.sort((a, b) => new Date(b.date) - new Date(a.date)))
+  else
+    setUpTable(events.filter(x => x.name.toLowerCase().includes(textContent ??"")))
+  const nameCheck = document.querySelector(".name.dropdown input") as HTMLInputElement
+  nameCheck.click()
+}
+
+const handleSortClick = (e: Element) => {
+  const sortText = document.querySelector(".sort.dropdown .dropdown-btn span")
+  if (!sortText) return
+  sortText.textContent = e.textContent
+  console.log(e.textContent)
+  if (e.textContent === "Most Recent")
+    setUpTable(events.sort((a, b) => new Date(a.date).getMilliseconds() - new Date(b.date).getMilliseconds()))
+  else if (e.textContent === "Alphabetical")
+    setUpTable(events.sort((a, b) => a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase())))
+ 
+  const sortCheck = document.querySelector(".sort.dropdown input") as HTMLInputElement
+  sortCheck.click()
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  setUpTable(events.sort((a, b) => new Date(b.date) - new Date(a.date)))
+ 
+  const searchTerm = document.getElementById("searchterm")
+  searchTerm?.addEventListener("change", handleSearch)
+
+  const sortDropdown = document.querySelectorAll(".sort.dropdown .dropdown-item")
+  sortDropdown.forEach(e => {
+    e?.addEventListener("click", () => handleSortClick(e))
+  })
+
+  const nameDropdown = document.querySelectorAll(".name.dropdown .dropdown-item")
+  nameDropdown.forEach(e => {
+    e?.addEventListener("click", () => handleNameClick(e))
+  })
+
+  const statusDropdown = document.querySelectorAll(".status.dropdown .dropdown-item")
+  statusDropdown.forEach(e => {
+    e?.addEventListener("click", () => handleStatusClick(e))
+  })
+  
   function changeThumbs(newIndex: number) {
     const thumbs = document.querySelectorAll(".thumb")
     thumbs.forEach((e) => {

@@ -67,7 +67,7 @@ main {
   display: none;
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 768px) {
   .mobile-nav {
     padding: 1rem;
     display: flex;
@@ -109,6 +109,20 @@ span, a {
   z-index: 2;
 }
 
+.dropdown input[type="date"]::-webkit-calendar-picker-indicator {
+  background: var(--b-1);
+  border: 1px solid var(--b-3);
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  width: auto;
+}
+
 .dropdown-btn {
   padding: 8px 16px 8px 16px;
   display: flex;
@@ -122,11 +136,11 @@ span, a {
   background-color: var(--b-2);
 }
 
-.dropdown:hover .dropdown-btn {
+.dropdown input:hover + .dropdown-btn {
   background-color: var(--accent);
 }
 
-.dark .dropdown:hover .dropdown-btn {
+.dark .dropdown input:hover + .dropdown-btn {
   background-color: var(--b-2);
   border-color: var(--b-3);
 }
@@ -152,12 +166,19 @@ span, a {
   display: none;
   position: absolute;
     top: 110%;
-    width: 100%;
+    width: 130%;
     left: 0;
     background-color: #fff;
     border: 1px solid var(--b-3);
     padding: 8px;
     flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown .dropdown-list {
+    left: auto;
+    right: 0;
+  }
 }
 
 .dark .dropdown .dropdown-list {
@@ -167,13 +188,19 @@ span, a {
 
 .dropdown .dropdown-list .dropdown-item {
   padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 20px;
   border-radius: 5px;
   color: var(--bc);
-  cursor: pointer;
 }
 
 .dropdown .dropdown-list .dropdown-item:hover {
-  background-color: var(--b-2);
+  background-color: var(--b-3);
+}
+
+.dark .dropdown .dropdown-list .dropdown-item:hover {
+  background-color: var(--neutral);
 }
 
 .dropdown input:checked ~ .dropdown-list {
@@ -248,7 +275,7 @@ span, a {
   background-color: var(--b-2);
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 768px) {
   .modal-content {
     position: relative;
     margin: 0 auto;
@@ -355,7 +382,7 @@ span, a {
   --bg-opacity: 0.35;
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 768px) {
     .modal-footer {
       flex-direction: column;
     }

@@ -12,6 +12,35 @@ nav {
     padding: 0.5rem;
 }
 
+@media screen and (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 0;
+        padding: 8px;
+        max-width: auto;
+        background-color: var(--b-1);
+        width: calc(100vw) !important;
+        max-width: none;
+        min-height: 100vh;
+        transition-duration: 300ms;
+        transition: all;
+        left: -100%;
+        z-index: 998;
+    }
+
+    .dark nav {
+        background-color: var(--b-2);
+    }
+
+    nav.open {
+        left: 0;
+    }
+
+    #nav-toggler {
+        display: block !important;
+    }
+}
+
 .dark nav {
     border-right: 0;
     background-color: var(--b-2);
@@ -102,6 +131,8 @@ nav .nav-link:hover {
     cursor: pointer;
 }
 
+/* COLLAPSED NAV STYLES */
+
 nav.collapsed {
     width: 4rem;
     /* transition-duration: 300ms;
@@ -176,6 +207,8 @@ nav.collapsed #collapse-btn svg {
     stroke: #64748B;
 }
 
+/* PROFILE INFO */
+
 .profile-info {
     display: grid;
     padding: 8px 16px 8px 8px;
@@ -209,6 +242,7 @@ nav.collapsed #collapse-btn svg {
     color: #fff;
 }
 
+/* THEME SWITCHER */
 .theme-switcher {
     padding: 0 8px;
     display: flex;
@@ -245,6 +279,7 @@ nav.collapsed #collapse-btn svg {
     right: 2px;
 }
 
+/* NOTIFICATION TIP */
 .tip{
     width: 24px;
     height: 24px;
@@ -254,30 +289,7 @@ nav.collapsed #collapse-btn svg {
     justify-content: center;
     align-items: center;
     font-size: 12px;
-        color: white;
-        line-height: 16px;
+    color: white;
+    line-height: 16px;
     border-radius: 50%;
-    
-}
-
-@media screen and (max-width: 475px) {
-    nav {
-        position: fixed;
-        top: 0;
-        padding: 8px;
-        max-width: auto;
-        width: calc(100vw - 1rem);
-        min-height: 100vh;
-        transition-duration: 300ms;
-        transition: all;
-        left: -100%;
-    }
-
-    nav.open {
-        left: 0;
-    }
-
-        #nav-toggler {
-            display: block;
-        }
 }

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /static/audio/
+Disallow: /static/fonts/
+Disallow: /static/js/
+Disallow: /frames/
+Disallow: /share/
+Sitemap: https://event-tracker-roan.vercel.app/sitemap.xml
+Host: https://event-tracker-roan.vercel.app
