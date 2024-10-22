@@ -89,8 +89,11 @@ const handleNameClick = (e: Element) => {
   if (!nameText) return
   const textContent = e.textContent?.trim().toLowerCase()
   nameText.textContent = e.textContent
-  if(e.textContent === "Name")
+  
+  if(e.textContent === "Name"){
+    // @ts-ignore
     setUpTable(events.sort((a, b) => new Date(b.date) - new Date(a.date)))
+  }
   else
     setUpTable(events.filter(x => x.name.toLowerCase().includes(textContent ??"")))
   const nameCheck = document.querySelector(".name.dropdown input") as HTMLInputElement
@@ -113,6 +116,7 @@ const handleSortClick = (e: Element) => {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  // @ts-ignore
   setUpTable(events.sort((a, b) => new Date(b.date) - new Date(a.date)))
  
   const searchTerm = document.getElementById("searchterm")
