@@ -2,6 +2,7 @@ import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, T
 import gsap from 'gsap'
 import events from './data'
 
+// For setting up and refreshing table
 const setUpTable = (data: {
   name: string;
   date: string;
@@ -63,17 +64,18 @@ const setUpTable = (data: {
   })
 }
 
+// For handling the search for the table
 const handleSearch = (e: Event) => {
   const input = e.target as HTMLInputElement
   setUpTable(events.filter(x => x.name.includes(input.value)))
 }
 
+// For handling change status dropdown
 const handleStatusClick = (e: Element) => {
   const statusText = document.querySelector(".status.dropdown .dropdown-btn span")
   if(!statusText) return
   statusText.textContent = e.textContent
-  console.log(e.textContent?.trim())
-  if (e.textContent === "Status"){
+   if (e.textContent === "Status"){
     setUpTable(events)
   } else
   setUpTable(events.filter(x => x.status.toLowerCase().includes(e.textContent?.toLowerCase().trim() ??"")))
@@ -81,6 +83,7 @@ const handleStatusClick = (e: Element) => {
   statusCheck.click()
 }
 
+// For handling change name dropdown
 const handleNameClick = (e: Element) => {
   const nameText = document.querySelector(".name.dropdown .dropdown-btn span")
   if (!nameText) return
@@ -94,6 +97,7 @@ const handleNameClick = (e: Element) => {
   nameCheck.click()
 }
 
+// For handling sort dropdown
 const handleSortClick = (e: Element) => {
   const sortText = document.querySelector(".sort.dropdown .dropdown-btn span")
   if (!sortText) return
@@ -178,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 
+  // Handling the Nav collapse
   const collapseBtn = document.getElementById("collapse-btn") as HTMLDivElement
 
   collapseBtn.addEventListener("click", () => {
@@ -192,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
+  // Handling the image slider
   const slideArr = document.querySelectorAll(".carousel-item") as NodeListOf<HTMLDivElement>
   const thumbsParent = document.querySelector(".thumbs")
   slideArr.forEach((e, i) => {
@@ -245,6 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
     slideRight()
   }, 3000);
     
+
+  // Handling the bar chart
   Chart.register(LinearScale, CategoryScale, BarController, BarElement, Title, Tooltip, Legend);
   const chartElem = document.getElementById('bar-chart') as HTMLCanvasElement;
   const myChart = new Chart(chartElem, {
@@ -309,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Handling the bar chart when the theme is light
   const setupLightMode = () => {
     myChart.options.scales = {
       x: {
@@ -319,9 +328,8 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         grid: {
           drawTicks: false,
-          // offset: true,
-          drawOnChartArea: true, // Allow gridlines to be drawn on the chart
-          tickBorderDash: [3, 3] // Dashed gridlines for x-axis (5px dash, 5px gap)
+          drawOnChartArea: true,
+          tickBorderDash: [3, 3]
         },
         offset: true
       },
@@ -329,10 +337,6 @@ document.addEventListener('DOMContentLoaded', function () {
         min: 0,
         max: 1000,
         ticks: {
-          // font: {
-          //   size: 10,
-          //   lineHeight: 12,
-          // },
           color: "#64748B",
           padding: 10,
           stepSize: 200,
@@ -352,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
     myChart.update()
   }
 
+  // Handling the bar chart when the theme is dark
   const setupDarkMode = () => {
     myChart.options.scales = {
       x: {
@@ -394,6 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
     myChart.update()
   }
 
+  // Handling opening modal for the events
   const openEventModal = (e: Event) => {
     const modalContent = document.querySelector(".modal-content") as HTMLDivElement
     if (!modalContent) return
@@ -441,6 +447,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.setAttribute("open", "true")
   }
 
+  // Handling closing modal for the events
   const closeEventModal = () => {
     const modal = document.querySelector(".modal")
     if (!modal) return
